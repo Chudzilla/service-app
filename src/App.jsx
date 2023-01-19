@@ -1,6 +1,7 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import { ServiceList } from './components/ServiceList/ServiceList';
 import { AddServiceAction } from './components/AddServiceAction';
+import {EditServiceAction} from './components/EditServiceAction'
 import { MainLayout } from './layout'
 
 function App() {
@@ -16,6 +17,10 @@ function App() {
         {
           path: '/add',
           element: <AddServiceAction />
+        },
+        {
+          path: '/edit/:id',
+          element: <EditServiceAction />
         }
       ]
     }

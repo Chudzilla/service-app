@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { getDocs, collection, deleteDoc, doc } from "firebase/firestore/lite"
 import List from '@mui/material/List';
@@ -8,17 +9,23 @@ import { db } from '../../firebase'
 
 export const ServiceList = () => {
     const [serviceActions, setServiceActions] = useState()
+    const navigate = useNavigate();
 
     const fetchServiceActions = async () => {
-        const documents = []
-        const querySnapshot = await getDocs(collection(db, "service"));
-        querySnapshot.forEach((doc) => {
-            documents.push({
-                id: doc.id,
-                data: doc.data()
-            })
-        });
-        setServiceActions(documents)
+        try {
+            const documents = []
+            const querySnapshot = await getDocs(collection(db, "service"));
+            querySnapshot.forEach((doc) => {
+                documents.push({
+                    id: doc.id,
+                    data: doc.data()
+                })
+            });
+            setServiceActions(documents)
+        } catch(_e) {
+            alert('Wystąpił błąd podczas pobierania danych')
+        }
+
     }
 
     useEffect(() => {
@@ -27,8 +34,13 @@ export const ServiceList = () => {
 
 
     const deleteServiceAction = async(actionId) => {
-        await deleteDoc(doc(db, "service", actionId));
-        fetchServiceActions()
+        try {
+            await deleteDoc(doc(db, "service", actionId));
+            fetchServiceActions()
+        } catch(_e) {
+            alert('Wystapił błąd podczas usuwania')
+        }
+
     }
 
     return (
@@ -53,7 +65,7 @@ export const ServiceList = () => {
                             <SecondItemInRow><Bold>Problem:</Bold> {problem}</SecondItemInRow>
                         </CardRow>
                         <ButtonsRow>
-                            <Button color="secondary" variant="contained">Edit</Button>
+                            <Button color="secondary" variant="contained" onClick={() => navigate(`/edit/${id}`)}>Edit</Button>
                             <SecondButton variant="contained" color="error" onClick={() => deleteServiceAction(id)}>
                                 Delete
                             </SecondButton>
