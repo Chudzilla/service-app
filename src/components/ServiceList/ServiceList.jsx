@@ -50,8 +50,8 @@ export const ServiceList = () => {
                 {serviceActions && serviceActions.length === 0 && (
                     <Text>Brak akcji serwisowych</Text>
                 )}
-                {serviceActions.map(({ id, data: { author, company, createdAt, duration, machine, problem } }) => (
-                    <CardContainer key={id}>
+                {serviceActions.map(({ id, data: { author, company, createdAt, duration, machine, problem } }, index) => (
+                    <CardContainer key={id} index={index} serviceActions={serviceActions}>
                         <CardRow>
                             <p><Bold>Autor:</Bold> {author}</p>
                             <SecondItemInRow><Bold>Company:</Bold> {company}</SecondItemInRow>
@@ -101,7 +101,7 @@ const CardContainer = styled.div`
     background-color: #35baf6;
     border-radius: 6px;
     padding: 16px;
-    margin-bottom: 16px;
+    margin-bottom: ${({index, serviceActions}) => index === serviceActions.length -1 ? '64px' : '16px'};
 `
 
 const CardRow = styled.div`
