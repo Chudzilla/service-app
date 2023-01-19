@@ -34,7 +34,7 @@ const Layout = styled.div`
 `
 
 const Header = styled.div`
-    background-color: #3f51b5;
+    background-color: #0276aa;
     color: #fff;
     padding: 16px;
     font-size: 24px;
@@ -42,7 +42,7 @@ const Header = styled.div`
 `
 
 const BottomMenu = styled.div`
-    background-color: #3f51b5;
+    background-color: #0276aa;
     position: absolute;
     bottom: 0;
     right: 0;
