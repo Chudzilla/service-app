@@ -1,12 +1,14 @@
 import styled from "styled-components"
+import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { collection, addDoc, doc, setDoc } from "firebase/firestore/lite";
+import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { db } from '../../firebase'
 import { useState } from "react";
 
 export const AddServiceAction = () => {
+    const navigate = useNavigate();
     const [company, setCompany] = useState('')
     const [machine, setMachine] = useState('')
     const [problem, setProblem] = useState('')
@@ -35,6 +37,7 @@ export const AddServiceAction = () => {
                 duration: Number(duration),
                 author
             });
+            navigate('/')
         } catch (_e) {
             alert('Wystąpił błąd')
         } finally {

@@ -18,7 +18,9 @@ export const MainLayout = () => {
             <Header>
                 <p>Aplikacja servisowa v.2137</p>
             </Header>
-            <Outlet />
+            <Content>
+                <Outlet />
+            </Content>
             <BottomMenu>
                 <ListIcon fontSize="large" onClick={navigateToList} />
                 <AddServiceIcon fontSize="large" onClick={navigateToAddElement} />
@@ -38,7 +40,7 @@ const Header = styled.div`
     color: #fff;
     padding: 16px;
     font-size: 24px;
-
+    height: 4vh;
 `
 
 const BottomMenu = styled.div`
@@ -50,6 +52,13 @@ const BottomMenu = styled.div`
     display: flex;
     justify-content: space-around;
     padding: 20px 0;
+    height: 4vh;
+`
+
+const Content = styled.div`
+    width: 100%;
+    height: 92vh;
+    overflow-y: auto;
 `
 
 const ListIcon = styled(ListAltIcon)`
