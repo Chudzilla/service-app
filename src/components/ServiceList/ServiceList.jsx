@@ -47,6 +47,9 @@ export const ServiceList = () => {
         <Container>
             <Header>Lista akcji serwisowych</Header>
             {serviceActions && <List dense={false}>
+                {serviceActions && serviceActions.length === 0 && (
+                    <Text>Brak akcji serwisowych</Text>
+                )}
                 {serviceActions.map(({ id, data: { author, company, createdAt, duration, machine, problem } }, index) => (
                     <CardContainer key={id} index={index} serviceActions={serviceActions}>
                         <CardRow>
@@ -91,6 +94,8 @@ const Header = styled.h1`
     font-size: 28px;
     margin-bottom: 24px;
 `
+
+const Text = styled.p``
 
 const CardContainer = styled.div`
     background-color: #35baf6;
